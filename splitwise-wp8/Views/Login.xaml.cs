@@ -11,6 +11,7 @@ using RestSharp;
 using RestSharp.Authenticators;
 using Splitwise.Utility;
 using Splitwise;
+using System.IO.IsolatedStorage;
 
 namespace splitwise_wp8.Views
 {
@@ -24,6 +25,8 @@ namespace splitwise_wp8.Views
 
         private RestClient client;
 
+        private IsolatedStorageSettings storage = System.IO.IsolatedStorage.IsolatedStorageSettings.ApplicationSettings;
+
         public Login()
         {
             InitializeComponent();
@@ -35,18 +38,31 @@ namespace splitwise_wp8.Views
 
         private async void Login_Loaded(object sender, RoutedEventArgs e)
         {
-            // Start the oAuth flow
-            client.Authenticator = OAuth1Authenticator.ForRequestToken(consumerKey, consumerSecret);
 
-            var request = new RestRequest("get_request_token", Method.POST);
-            var response = await client.ExecuteRequestAsync(request);
+            // Check isolated storage for existing OAuth information
+            OAuthCredentials credentials;
 
-            var qs = HttpHelpers.ParseQueryString(response.Content);
-            oauth_token = qs["oauth_token"];
-            oauth_token_secret = qs["oauth_token_secret"];
+            storage.TryGetValue("credentials", out credentials);
 
-            var url = new Uri(string.Format("{0}?oauth_token={1}", authorizeUrl, oauth_token));
-            LoginBrowser.Navigate(url);
+            if (credentials != null)
+            {
+                CompleteLogin(credentials);
+            }
+            else
+            {
+                // Start the oAuth flow
+                client.Authenticator = OAuth1Authenticator.ForRequestToken(consumerKey, consumerSecret);
+
+                var request = new RestRequest("get_request_token", Method.POST);
+                var response = await client.ExecuteRequestAsync(request);
+
+                var qs = HttpHelpers.ParseQueryString(response.Content);
+                oauth_token = qs["oauth_token"];
+                oauth_token_secret = qs["oauth_token_secret"];
+
+                var url = new Uri(string.Format("{0}?oauth_token={1}", authorizeUrl, oauth_token));
+                LoginBrowser.Navigate(url);
+            }
         }
 
         private async void LoginBrowser_Navigating(object sender, NavigatingEventArgs e)
@@ -65,14 +81,29 @@ namespace splitwise_wp8.Views
                 this.oauth_token = qs["oauth_token"];
                 this.oauth_token_secret = qs["oauth_token_secret"];
 
-                // Set up the authenticator on the client object
-                client.Authenticator = OAuth1Authenticator.ForProtectedResource(
-                    consumerKey, consumerSecret, this.oauth_token, this.oauth_token_secret
-                );
+                OAuthCredentials credentials = new OAuthCredentials() {
+                    OAuthToken = this.oauth_token,
+                    OAuthTokenSecret = this.oauth_token_secret,
+                    OAuthVerifier = verifier
+                };
 
-                // Navigate to the MainPage.xaml file
-                NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+                // Save to isolated storage
+                storage["credentials"] = credentials;
+                storage.Save();
+
+                CompleteLogin(credentials);
             }
+        }
+
+        private void CompleteLogin(OAuthCredentials credentials)
+        {
+            // Set up the authenticator on the client object
+            client.Authenticator = OAuth1Authenticator.ForProtectedResource(
+                consumerKey, consumerSecret, credentials.OAuthToken, credentials.OAuthTokenSecret
+            );
+
+            // Navigate to the MainPage.xaml file
+            NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
         }
     }
 }
