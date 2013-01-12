@@ -10,6 +10,7 @@ using Microsoft.Phone.Shell;
 using RestSharp;
 using RestSharp.Authenticators;
 using Splitwise.Utility;
+using Splitwise;
 
 namespace splitwise_wp8.Views
 {
@@ -17,7 +18,6 @@ namespace splitwise_wp8.Views
     {
         private const string consumerKey = "YwXp1fv6yiaRfpuCXi8dQCETqh81qTtJiH5tWbDb";
         private const string consumerSecret = "gkKrT7o2uF8iSF9rli0JmuDwWbYA7JvWrRsCKIDk";
-        private const string baseUrl = "https://secure.splitwise.com/api/{version}";
         private const string authorizeUrl = "https://secure.splitwise.com/authorize";
 
         private string oauth_token, oauth_token_secret;
@@ -28,8 +28,9 @@ namespace splitwise_wp8.Views
         {
             InitializeComponent();
 
-            client = new RestClient(baseUrl);
-            client.AddDefaultUrlSegment("version", "v2.1");
+            SplitwiseProxy proxy = SplitwiseProxy.GetProxyInstance();
+
+            client = proxy.RestClient;
         }
 
         private async void Login_Loaded(object sender, RoutedEventArgs e)
@@ -64,41 +65,14 @@ namespace splitwise_wp8.Views
                 this.oauth_token = qs["oauth_token"];
                 this.oauth_token_secret = qs["oauth_token_secret"];
 
+                // Set up the authenticator on the client object
                 client.Authenticator = OAuth1Authenticator.ForProtectedResource(
-                consumerKey, consumerSecret, this.oauth_token, this.oauth_token_secret
-            );
+                    consumerKey, consumerSecret, this.oauth_token, this.oauth_token_secret
+                );
 
-                request = new RestRequest("get_expenses", Method.GET);
-                response = await client.ExecuteRequestAsync(request);
-
-                var a = 2;
+                // Navigate to the MainPage.xaml file
+                NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
             }
         }
-
-        /*
-         *   
-            var verifier = "K83STEYYCfc1ncSXMvXO"; // <-- Breakpoint here (set verifier in debugger)
-            request = new RestRequest("get_access_token", Method.POST);
-            client.Authenticator = OAuth1Authenticator.ForAccessToken(
-                consumerKey, consumerSecret, oauth_token, oauth_token_secret, verifier
-            );
-            response = client.Execute(request);
-
-            //Assert.NotNull(response);
-            //Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-
-            qs = HttpUtility.ParseQueryString(response.Content);
-            oauth_token = qs["oauth_token"];
-            oauth_token_secret = qs["oauth_token_secret"];
-            //Assert.NotNull(oauth_token);
-            //Assert.NotNull(oauth_token_secret);
-
-            request = new RestRequest("account/verify_credentials.xml");
-            client.Authenticator = OAuth1Authenticator.ForProtectedResource(
-                consumerKey, consumerSecret, oauth_token, oauth_token_secret
-            );
-
-            response = client.Execute(request);
-*/
     }
 }

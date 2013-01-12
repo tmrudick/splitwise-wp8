@@ -103,6 +103,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="SplitwiseProxy.cs" />
     <Compile Include="Utility\HttpHelpers.cs" />
     <Compile Include="Utility\TaskHelpers.cs" />
     <Compile Include="ViewModels\ItemViewModel.cs" />

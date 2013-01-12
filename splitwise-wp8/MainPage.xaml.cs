@@ -7,6 +7,9 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using Splitwise;
+using RestSharp;
+using Splitwise.Utility;
 
 namespace splitwise_wp8
 {
@@ -22,10 +25,15 @@ namespace splitwise_wp8
         }
 
         // Load data for the ViewModel Items
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             if (!App.ViewModel.IsDataLoaded)
             {
+                SplitwiseProxy proxy = SplitwiseProxy.GetProxyInstance();
+
+                var request = new RestRequest("get_expenses", Method.GET);
+                var response = await proxy.RestClient.ExecuteRequestAsync(request);
+
                 App.ViewModel.LoadData();
             }
         }
