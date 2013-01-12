@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
   <DefaultLanguage xmlns="" code="en-US" />
-  <App xmlns="" ProductID="{12b62a36-fc54-4981-a420-1f7d6e3af068}" Title="splitwise_wp8" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="splitwise_wp8 author" Description="Sample description" Publisher="splitwise_wp8" PublisherID="{94b1a1ab-5df8-4d3f-9236-c42d4c13faba}">
+  <App xmlns="" ProductID="{12b62a36-fc54-4981-a420-1f7d6e3af068}" Title="Splitwise" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="The Monadics" Description="Sample description" Publisher="Splitwise" PublisherID="{94b1a1ab-5df8-4d3f-9236-c42d4c13faba}">
     <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />
@@ -14,12 +14,12 @@
       <DefaultTask Name="_default" NavigationPage="Views/Login.xaml" />
     </Tasks>
     <Tokens>
-      <PrimaryToken TokenID="splitwise_wp8Token" TaskName="_default">
+      <PrimaryToken TokenID="SplitwiseToken" TaskName="_default">
         <TemplateFlip>
           <SmallImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileSmall.png</SmallImageURI>
           <Count>0</Count>
           <BackgroundImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileMedium.png</BackgroundImageURI>
-          <Title>splitwise_wp8</Title>
+          <Title>Splitwise</Title>
           <BackContent>
           </BackContent>
           <BackBackgroundImageURI>

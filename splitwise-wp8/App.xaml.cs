@@ -8,10 +8,10 @@ using System.Windows.Markup;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using splitwise_wp8.Resources;
-using splitwise_wp8.ViewModels;
+using Splitwise.Resources;
+using Splitwise.ViewModels;
 
-namespace splitwise_wp8
+namespace Splitwise
 {
     public partial class App : Application
     {

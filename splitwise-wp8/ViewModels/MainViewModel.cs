@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using splitwise_wp8.Resources;
+using Splitwise.Resources;
 
-namespace splitwise_wp8.ViewModels
+namespace Splitwise.ViewModels
 {
     public class MainViewModel : INotifyPropertyChanged
     {

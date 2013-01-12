@@ -8,7 +8,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 
-namespace splitwise_wp8.ViewModels
+namespace Splitwise.ViewModels
 {
     public class ItemViewModel : INotifyPropertyChanged
     {

@@ -11,7 +11,7 @@ using Splitwise;
 using RestSharp;
 using Splitwise.Utility;
 
-namespace splitwise_wp8
+namespace Splitwise
 {
     public partial class MainPage : PhoneApplicationPage
     {

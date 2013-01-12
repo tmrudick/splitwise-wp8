@@ -13,7 +13,7 @@ using Splitwise.Utility;
 using Splitwise;
 using System.IO.IsolatedStorage;
 
-namespace splitwise_wp8.Views
+namespace Splitwise.Views
 {
     public partial class Login : PhoneApplicationPage
     {
