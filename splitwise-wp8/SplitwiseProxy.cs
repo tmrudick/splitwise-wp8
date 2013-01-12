@@ -15,6 +15,7 @@ namespace Splitwise
 
         private const string baseUrl = "https://secure.splitwise.com/api/v2.1";
         private RestClient client;
+        private User currentUser;
 
         protected SplitwiseProxy()
         {
@@ -26,6 +27,16 @@ namespace Splitwise
         public RestClient RestClient
         {
             get { return this.client; }
+        }
+
+        public async Task<User> GetCurrentUser()
+        {
+            var request = new RestRequest("get_current_user", Method.GET);
+            UserWrapper wrapper = await this.client.ExecuteRequestAsync<UserWrapper>(request);
+
+            this.currentUser = wrapper.User;
+
+            return this.currentUser;
         }
 
         public async Task<IEnumerable<Expense>> GetExpenses()

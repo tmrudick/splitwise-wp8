@@ -24,6 +24,7 @@ namespace Splitwise.Views
         private string oauth_token, oauth_token_secret;
 
         private RestClient client;
+        private SplitwiseProxy proxy;
 
         private IsolatedStorageSettings storage = System.IO.IsolatedStorage.IsolatedStorageSettings.ApplicationSettings;
 
@@ -31,7 +32,7 @@ namespace Splitwise.Views
         {
             InitializeComponent();
 
-            SplitwiseProxy proxy = SplitwiseProxy.GetProxyInstance();
+            proxy = SplitwiseProxy.GetProxyInstance();
 
             client = proxy.RestClient;
         }
@@ -95,12 +96,14 @@ namespace Splitwise.Views
             }
         }
 
-        private void CompleteLogin(OAuthCredentials credentials)
+        private async void CompleteLogin(OAuthCredentials credentials)
         {
             // Set up the authenticator on the client object
-            client.Authenticator = OAuth1Authenticator.ForProtectedResource(
+            this.client.Authenticator = OAuth1Authenticator.ForProtectedResource(
                 consumerKey, consumerSecret, credentials.OAuthToken, credentials.OAuthTokenSecret
             );
+
+            await this.proxy.GetCurrentUser();
 
             // Navigate to the MainPage.xaml file
             NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
