@@ -1,9 +1,11 @@
 ﻿using RestSharp;
+using Splitwise.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Splitwise.Utility;
 
 namespace Splitwise
 {
@@ -24,6 +26,14 @@ namespace Splitwise
         public RestClient RestClient
         {
             get { return this.client; }
+        }
+
+        public async Task<IEnumerable<Expense>> GetExpenses()
+        {
+            var request = new RestRequest("get_expenses", Method.GET);
+            ExpenseWrapper wrapper = await proxy.RestClient.ExecuteRequestAsync<ExpenseWrapper>(request);
+
+            return wrapper.Expenses;
         }
 
         public static SplitwiseProxy GetProxyInstance()

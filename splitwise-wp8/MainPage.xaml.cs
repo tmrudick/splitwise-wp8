@@ -31,8 +31,7 @@ namespace splitwise_wp8
             {
                 SplitwiseProxy proxy = SplitwiseProxy.GetProxyInstance();
 
-                var request = new RestRequest("get_expenses", Method.GET);
-                var response = await proxy.RestClient.ExecuteRequestAsync(request);
+                var expenses = await proxy.GetExpenses();
 
                 App.ViewModel.LoadData();
             }
