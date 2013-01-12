@@ -31,7 +31,7 @@ namespace Splitwise
         public async Task<IEnumerable<Expense>> GetExpenses()
         {
             var request = new RestRequest("get_expenses", Method.GET);
-            ExpenseWrapper wrapper = await proxy.RestClient.ExecuteRequestAsync<ExpenseWrapper>(request);
+            ExpenseWrapper wrapper = await this.client.ExecuteRequestAsync<ExpenseWrapper>(request);
 
             return wrapper.Expenses;
         }
