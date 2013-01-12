@@ -11,6 +11,11 @@ namespace Splitwise.Models
         public string Description { get; set; }
         public string Cost { get; set; }
 
+        public User CreatedBy { get; set; }
+        public List<Payment> Users { get; set; }
+
+        public Category Category { get; set; }
+
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
     }
