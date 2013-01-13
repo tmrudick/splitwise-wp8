@@ -103,7 +103,7 @@ namespace Splitwise.Views
                 consumerKey, consumerSecret, credentials.OAuthToken, credentials.OAuthTokenSecret
             );
 
-            await this.proxy.GetCurrentUser();
+            await this.proxy.LoadCurrentUser();
 
             // Navigate to the MainPage.xaml file
             NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));

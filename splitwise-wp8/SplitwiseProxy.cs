@@ -29,7 +29,12 @@ namespace Splitwise
             get { return this.client; }
         }
 
-        public async Task<User> GetCurrentUser()
+        public User CurrentUser
+        {
+            get { return this.currentUser; }
+        }
+
+        public async Task<User> LoadCurrentUser()
         {
             var request = new RestRequest("get_current_user", Method.GET);
             UserWrapper wrapper = await this.client.ExecuteRequestAsync<UserWrapper>(request);
