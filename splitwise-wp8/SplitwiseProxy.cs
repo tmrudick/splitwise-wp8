@@ -60,6 +60,18 @@ namespace Splitwise
             return wrapper.GetFriends();
         }
 
+        public async Task<Expense> CreateExpense(Expense expense)
+        {
+            var request = new RestRequest("create_expense", Method.POST);
+            // TODO: Add shared expenses POST format.
+            // http://dev.splitwise.com/dokuwiki/doku.php?id=create_expense
+            request.AddBody(expense);
+
+            Expense result = await this.client.ExecuteRequestAsync<Expense>(request);
+
+            return result;
+        }
+
         public static SplitwiseProxy GetProxyInstance()
         {
             if (proxy == null)
