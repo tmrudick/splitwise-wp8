@@ -32,6 +32,7 @@ namespace Splitwise
                 SplitwiseProxy proxy = SplitwiseProxy.GetProxyInstance();
 
                 var expenses = await proxy.GetExpenses();
+                var friends = await proxy.GetFriends();
 
                 App.ViewModel.LoadData();
             }

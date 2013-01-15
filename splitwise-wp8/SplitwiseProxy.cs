@@ -52,6 +52,14 @@ namespace Splitwise
             return wrapper.Expenses;
         }
 
+        public async Task<IEnumerable<User>> GetFriends()
+        {
+            var request = new RestRequest("get_friendships", Method.GET);
+            FriendshipWrapper wrapper = await this.client.ExecuteRequestAsync<FriendshipWrapper>(request);
+
+            return wrapper.GetFriends();
+        }
+
         public static SplitwiseProxy GetProxyInstance()
         {
             if (proxy == null)
