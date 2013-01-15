@@ -38,7 +38,7 @@
   <ItemGroup>
     <Compile Include="Category.cs" />
     <Compile Include="Expense.cs" />
-    <Compile Include="Friend.cs" />
+    <Compile Include="Friendship.cs" />
     <Compile Include="Payment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User.cs" />
