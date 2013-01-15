@@ -25,7 +25,16 @@
             <!--Panorama item two-->
             <phone:PanoramaItem Header="friends">
                 <Grid>
-                    
+                    <ListBox ItemsSource="{Binding Friends}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="{Binding PhotoUrl}" />
+                                    <TextBlock Text="{Binding AbbreviatedName}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
                 </Grid>
             </phone:PanoramaItem>
         </phone:Panorama>

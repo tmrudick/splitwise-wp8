@@ -106,6 +106,7 @@
     <Compile Include="SplitwiseProxy.cs" />
     <Compile Include="Utility\HttpHelpers.cs" />
     <Compile Include="Utility\TaskHelpers.cs" />
+    <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\ItemViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Views\Home.xaml.cs">
