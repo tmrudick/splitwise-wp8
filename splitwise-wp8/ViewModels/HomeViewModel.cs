@@ -11,11 +11,13 @@ namespace Splitwise.ViewModels
     public class HomeViewModel
     {
         private ObservableCollection<User> _friends = new ObservableCollection<User>();
+        private ObservableCollection<Expense> _expenses = new ObservableCollection<Expense>();
         private SplitwiseProxy proxy = SplitwiseProxy.GetProxyInstance();
 
         public HomeViewModel()
         {
             LoadFriends();
+            LoadExpenses();
         }
 
         private async void LoadFriends()
@@ -28,11 +30,29 @@ namespace Splitwise.ViewModels
             }
         }
 
+        private async void LoadExpenses()
+        {
+            IEnumerable<Expense> expenses = await proxy.GetExpenses();
+
+            foreach (var expense in expenses)
+            {
+                _expenses.Add(expense);
+            }
+        }
+
         public ObservableCollection<User> Friends
         {
             get
             {
                 return _friends;
+            }
+        }
+
+        public ObservableCollection<Expense> Expenses
+        {
+            get
+            {
+                return _expenses;
             }
         }
     }
