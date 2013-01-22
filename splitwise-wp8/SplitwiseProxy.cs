@@ -52,12 +52,12 @@ namespace Splitwise
             return wrapper.Expenses;
         }
 
-        public async Task<IEnumerable<User>> GetFriends()
+        public async Task<IEnumerable<Friendship>> GetFriends()
         {
             var request = new RestRequest("get_friendships", Method.GET);
             FriendshipWrapper wrapper = await this.client.ExecuteRequestAsync<FriendshipWrapper>(request);
 
-            return wrapper.GetFriends();
+            return wrapper.Friendships;
         }
 
         public async Task<Expense> CreateExpense(Expense expense)

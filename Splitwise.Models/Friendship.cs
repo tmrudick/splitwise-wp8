@@ -9,25 +9,19 @@ namespace Splitwise.Models
     {
         public long Id { get; set; }
         public List<User> Users { get; set; }
+        public string Balance { get; set; }
+
+        public User Friend
+        {
+            get
+            {
+                return this.Users[0];
+            }
+        }
     }
 
     public class FriendshipWrapper
     {
         public List<Friendship> Friendships { get; set; }
-
-        // Return just the user objects. None of this friends mumbojumbo.
-        public List<User> GetFriends()
-        {
-            List<User> friends = new List<User>();
-            
-            foreach (Friendship friendship in this.Friendships)
-            {
-                // TODO: Taking the first thing might not always work.
-                // May need to pass in the current user and specifically check.
-                friends.Add(friendship.Users[0]);
-            }
-
-            return friends;
-        }
     }
 }
