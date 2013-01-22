@@ -46,7 +46,18 @@ namespace Splitwise
 
         public async Task<IEnumerable<Expense>> GetExpenses()
         {
+            return await GetExpenses(null);
+        }
+
+        public async Task<IEnumerable<Expense>> GetExpenses(int? friendshipId)
+        {
             var request = new RestRequest("get_expenses", Method.GET);
+
+            if (friendshipId != null)
+            {
+                request.AddParameter("friendshipId", friendshipId);
+            }
+
             ExpenseWrapper wrapper = await this.client.ExecuteRequestAsync<ExpenseWrapper>(request);
 
             return wrapper.Expenses;
