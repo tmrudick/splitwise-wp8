@@ -23,18 +23,16 @@
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
             <TextBlock Text="SPLITWISE" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Text="Nikki L." Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock Text="{Binding Friendship.Friend.AbbreviatedName}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <phone:LongListSelector ItemsSource="{Binding Friendships}">
+            <phone:LongListSelector ItemsSource="{Binding Expenses}">
                 <phone:LongListSelector.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <Image Source="{Binding Friend.PhotoUrl}" />
-                            <TextBlock Text="{Binding Friend.AbbreviatedName}" />
-                            <TextBlock Text="{Binding Balance}" />
+                            <TextBlock Text="{Binding Description}" />
                         </StackPanel>
                     </DataTemplate>
                 </phone:LongListSelector.ItemTemplate>

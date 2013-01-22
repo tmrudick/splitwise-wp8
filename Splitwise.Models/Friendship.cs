@@ -20,8 +20,13 @@ namespace Splitwise.Models
         }
     }
 
-    public class FriendshipWrapper
+    public class FriendshipsWrapper
     {
         public List<Friendship> Friendships { get; set; }
+    }
+
+    public class FriendshipWrapper
+    {
+        public Friendship Friendship { get; set; }
     }
 }

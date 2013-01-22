@@ -19,7 +19,7 @@
             <!--Panorama item two-->
             <phone:PanoramaItem Header="friends">
                 <Grid>
-                    <phone:LongListSelector ItemsSource="{Binding Friendships}">
+                    <phone:LongListSelector ItemsSource="{Binding Friendships}" Tap="Friendships_Tap">
                         <phone:LongListSelector.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">

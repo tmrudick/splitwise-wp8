@@ -49,13 +49,13 @@ namespace Splitwise
             return await GetExpenses(null);
         }
 
-        public async Task<IEnumerable<Expense>> GetExpenses(int? friendshipId)
+        public async Task<IEnumerable<Expense>> GetExpenses(long? friendshipId)
         {
             var request = new RestRequest("get_expenses", Method.GET);
 
             if (friendshipId != null)
             {
-                request.AddParameter("friendshipId", friendshipId);
+                request.AddParameter("friendship_id", friendshipId);
             }
 
             ExpenseWrapper wrapper = await this.client.ExecuteRequestAsync<ExpenseWrapper>(request);
@@ -66,9 +66,17 @@ namespace Splitwise
         public async Task<IEnumerable<Friendship>> GetFriends()
         {
             var request = new RestRequest("get_friendships", Method.GET);
-            FriendshipWrapper wrapper = await this.client.ExecuteRequestAsync<FriendshipWrapper>(request);
+            FriendshipsWrapper wrapper = await this.client.ExecuteRequestAsync<FriendshipsWrapper>(request);
 
             return wrapper.Friendships;
+        }
+
+        public async Task<Friendship> GetFriend(long friendshipId)
+        {
+            var request = new RestRequest("get_friendship/" + friendshipId, Method.GET);
+            FriendshipWrapper wrapper = await this.client.ExecuteRequestAsync<FriendshipWrapper>(request);
+
+            return wrapper.Friendship;
         }
 
         public async Task<Expense> CreateExpense(Expense expense)
