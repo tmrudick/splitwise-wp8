@@ -11,11 +11,27 @@ namespace Splitwise.Models
         public List<User> Users { get; set; }
         public string Balance { get; set; }
 
+        /// <summary>
+        /// A friendship consists of two users: yourself and the other person. This is yourself.
+        /// </summary>
+        public User Self { get; set; }
+
+        /// <summary>
+        /// A friendship consists of two users: yourself and the other person. This is the other person.
+        /// </summary>
         public User Friend
         {
             get
             {
-                return this.Users[0];
+                // Return the user that *isn't* yourself.
+                if (Self != null)
+                {
+                    return this.Users.Single(user => user.Id != Self.Id);
+                }
+                else
+                {
+                    throw new ArgumentNullException("Self", "First set the 'self' user before getting your friend.");
+                }
             }
         }
     }

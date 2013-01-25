@@ -68,6 +68,8 @@ namespace Splitwise
             var request = new RestRequest("get_friendships", Method.GET);
             FriendshipsWrapper wrapper = await this.client.ExecuteRequestAsync<FriendshipsWrapper>(request);
 
+            wrapper.Friendships.ToList().ForEach(friendship => friendship.Self = this.CurrentUser);
+
             return wrapper.Friendships;
         }
 
@@ -75,6 +77,8 @@ namespace Splitwise
         {
             var request = new RestRequest("get_friendship/" + friendshipId, Method.GET);
             FriendshipWrapper wrapper = await this.client.ExecuteRequestAsync<FriendshipWrapper>(request);
+
+            wrapper.Friendship.Self = this.CurrentUser;
 
             return wrapper.Friendship;
         }
