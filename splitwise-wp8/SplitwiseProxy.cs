@@ -95,6 +95,14 @@ namespace Splitwise
             return result;
         }
 
+        public async Task<IEnumerable<Category>> GetCategories()
+        {
+            var request = new RestRequest("get_categories", Method.GET);
+            CategoriesWrapper wrapper = await this.client.ExecuteRequestAsync<CategoriesWrapper>(request);
+
+            return wrapper.Categories;
+        }
+
         public static SplitwiseProxy GetProxyInstance()
         {
             if (proxy == null)

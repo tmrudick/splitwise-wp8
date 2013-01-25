@@ -9,5 +9,11 @@ namespace Splitwise.Models
     {
         public long Id { get; set; }
         public string Name { get; set; }
+        public List<Subcategory> Subcategories { get; set; }
+    }
+
+    public class CategoriesWrapper
+    {
+        public List<Category> Categories { get; set; }
     }
 }
