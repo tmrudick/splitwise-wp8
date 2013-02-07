@@ -33,5 +33,10 @@ namespace Splitwise.Views
                 NavigationService.Navigate(new Uri("/Views/Friend.xaml?friendshipId=" + friendship.Id, UriKind.Relative));
             }
         }
+
+        private void NewExpense_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Views/NewExpense.xaml", UriKind.Relative));
+        }
     }
 }
