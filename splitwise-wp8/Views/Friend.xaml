@@ -32,7 +32,7 @@
                 <phone:LongListSelector.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Description}" />
+                            <TextBlock Text="{Binding Description}" FontSize="42" />
                         </StackPanel>
                     </DataTemplate>
                 </phone:LongListSelector.ItemTemplate>
