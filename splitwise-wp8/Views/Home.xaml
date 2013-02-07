@@ -11,8 +11,13 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
-    shell:SystemTray.IsVisible="False">
+    shell:SystemTray.IsVisible="False"
+    xmlns:converters="clr-namespace:Splitwise.Converters">
 
+    <phone:PhoneApplicationPage.Resources>
+        <converters:DebtColorConverter x:Key="DebtColorConverter" />
+    </phone:PhoneApplicationPage.Resources>
+    
     <!--LayoutRoot contains the root grid where all other page content is placed-->
     <Grid x:Name="LayoutRoot">
         <phone:Panorama Title="splitwise">
@@ -22,10 +27,10 @@
                     <phone:LongListSelector ItemsSource="{Binding Friendships}" Tap="Friendships_Tap">
                         <phone:LongListSelector.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <Image Source="{Binding Friend.PhotoUrl}" />
-                                    <TextBlock Text="{Binding Friend.AbbreviatedName}" />
-                                    <TextBlock Text="{Binding Balance}" />
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                                    <Image Source="{Binding Friend.PhotoUrl}" Margin="10, 10, 10, 10" Height="50" Width="50" />
+                                    <TextBlock Text="{Binding Friend.AbbreviatedName}" FontSize="42" />
+                                    <TextBlock Text="{Binding Balance}" Foreground="{Binding Balance, Converter={StaticResource DebtColorConverter}}" FontSize="42"  TextAlignment="Right" HorizontalAlignment="Right" />
                                 </StackPanel>
                             </DataTemplate>
                         </phone:LongListSelector.ItemTemplate>

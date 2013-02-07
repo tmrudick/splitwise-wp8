@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Splitwise.Utility;
+using Newtonsoft.Json.Linq;
 
 namespace Splitwise
 {
@@ -86,13 +87,34 @@ namespace Splitwise
         public async Task<Expense> CreateExpense(Expense expense)
         {
             var request = new RestRequest("create_expense", Method.POST);
-            // TODO: Add shared expenses POST format.
-            // http://dev.splitwise.com/dokuwiki/doku.php?id=create_expense
-            request.AddBody(expense);
 
-            Expense result = await this.client.ExecuteRequestAsync<Expense>(request);
+            JObject payload = new JObject();
+            payload["cost"] = expense.Cost;
+            payload["payment"] = false;
+            payload["description"] = expense.Description;
 
-            return result;
+            for (int i = 0; i < expense.Users.Count; i++)
+            {
+                Payment payment = expense.Users[i];
+                payload.AddIfNotDefault("users__" + i + "__user_id", payment.User.Id);
+                payload.AddIfNotDefault("users__" + i + "__fist_name", payment.User.FirstName);
+                payload.AddIfNotDefault("users__" + i + "__last_name", payment.User.LastName);
+                payload.AddIfNotDefault("users__" + i + "__email", payment.User.Email);
+                payload.AddIfNotDefault("users__" + i + "__paid_share", payment.PaidShare);
+                payload.AddIfNotDefault("users__" + i + "__owed_share", payment.OwedShare);
+            }
+ 
+            var str = payload.ToString();
+            request.AddParameter("application/json", str, ParameterType.RequestBody);
+
+            ExpenseWrapper result = await this.client.ExecuteRequestAsync<ExpenseWrapper>(request);
+            if (result.Expenses.Count == 1)
+            {
+                // Success
+                return result.Expenses[0];
+            } 
+
+            return null;
         }
 
         public async Task<IEnumerable<Category>> GetCategories()
