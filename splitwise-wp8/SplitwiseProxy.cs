@@ -50,7 +50,7 @@ namespace Splitwise
             return await GetExpenses(null);
         }
 
-        public async Task<IEnumerable<Expense>> GetExpenses(long? friendshipId)
+        public async Task<IEnumerable<Expense>> GetExpenses(long? friendshipId, bool showDeleted = false)
         {
             var request = new RestRequest("get_expenses", Method.GET);
 
@@ -61,7 +61,14 @@ namespace Splitwise
 
             ExpenseWrapper wrapper = await this.client.ExecuteRequestAsync<ExpenseWrapper>(request);
 
-            return wrapper.Expenses;
+            if (showDeleted)
+            {
+                return wrapper.Expenses;
+            }
+            else
+            {
+                return wrapper.Expenses.Where(exp => exp.DeletedAt == null);
+            }
         }
 
         public async Task<IEnumerable<Friendship>> GetFriends()
