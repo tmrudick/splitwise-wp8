@@ -12,5 +12,7 @@ namespace Splitwise.Models
         public string PaidShare { get; set; }
         public string OwedShare { get; set; }
         public string NetBalance { get; set; }
+
+        public Expense Expense { get; set; }
     }
 }

@@ -11,7 +11,13 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True"
+    xmlns:converters="clr-namespace:Splitwise.Converters">
+
+    <phone:PhoneApplicationPage.Resources>
+        <converters:ExpenseBreakdownConverter x:Key="ExpenseBreakdownConverter" />
+        <converters:UTCDateConverter x:Key="UTCDateConverter" />
+    </phone:PhoneApplicationPage.Resources>
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -24,6 +30,20 @@
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
             <TextBlock Text="SPLITWISE" Style="{StaticResource PhoneTextNormalStyle}"/>
             <TextBlock Text="{Binding Description}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock Text="{Binding Cost}" />
+            <TextBlock Text="{Binding CreatedAt, Converter={StaticResource UTCDateConverter}}" />
+
+            <phone:LongListSelector ItemsSource="{Binding Users}">
+                <phone:LongListSelector.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="{Binding User.PhotoUrl}" />
+                            <TextBlock Text="{Binding User.AbbreviatedName}" />
+                            <TextBlock Text="{Binding Converter={StaticResource ExpenseBreakdownConverter}}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </phone:LongListSelector.ItemTemplate>
+            </phone:LongListSelector>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->

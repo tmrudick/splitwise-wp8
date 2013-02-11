@@ -140,6 +140,14 @@ namespace Splitwise
             return wrapper.Categories;
         }
 
+        public async Task<IEnumerable<Currency>> GetCurrencies()
+        {
+            var request = new RestRequest("get_currencies", Method.GET);
+            CurrencyWrapper wrapper = await this.client.ExecuteRequestAsync<CurrencyWrapper>(request);
+
+            return wrapper.Currencies;
+        }
+
         public static SplitwiseProxy GetProxyInstance()
         {
             if (proxy == null)

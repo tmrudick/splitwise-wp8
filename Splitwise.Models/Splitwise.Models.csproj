@@ -37,6 +37,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Category.cs" />
+    <Compile Include="Currency.cs" />
     <Compile Include="Expense.cs" />
     <Compile Include="Friendship.cs" />
     <Compile Include="Payment.cs" />
