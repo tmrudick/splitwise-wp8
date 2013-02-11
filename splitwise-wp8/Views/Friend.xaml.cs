@@ -32,5 +32,13 @@ namespace Splitwise.Views
 
             this.DataContext = viewModel;
         }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (Helpers.BackStackHelpers.ShouldHideFromBackStack(NavigationContext.QueryString))
+            {
+                NavigationService.RemoveBackEntry();
+            }
+        }
     }
 }

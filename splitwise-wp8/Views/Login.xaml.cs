@@ -106,7 +106,7 @@ namespace Splitwise.Views
             await this.proxy.LoadCurrentUser();
 
             // Navigate to the MainPage.xaml file
-            NavigationService.Navigate(new Uri("/Views/Home.xaml", UriKind.Relative));
+            NavigationService.Navigate(new Uri("/Views/Home.xaml?HideFromBackStack=true", UriKind.Relative));
         }
     }
 }

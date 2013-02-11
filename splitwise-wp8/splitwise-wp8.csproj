@@ -115,6 +115,7 @@
     <Compile Include="Views\Friend.xaml.cs">
       <DependentUpon>Friend.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Helpers\BackStackHelpers.cs" />
     <Compile Include="Views\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>

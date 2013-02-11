@@ -36,11 +36,24 @@ namespace Splitwise.Views
 
             if (expense != null)
             {
-                NavigationService.Navigate(new Uri("/Views/Home.xaml", UriKind.Relative));
+                NavigationService.Navigate(new Uri("/Views/Home.xaml?HideFromBackStack=true", UriKind.Relative));
             }
             else
             {
                 ErrorMessageTextBox.Text = "Some kind of error happened.";
+            }
+        }
+
+        private void Cancel_Click(object sender, EventArgs e)
+        {
+            NavigationService.GoBack();
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (Helpers.BackStackHelpers.ShouldHideFromBackStack(NavigationContext.QueryString))
+            {
+                NavigationService.RemoveBackEntry();
             }
         }
     }
