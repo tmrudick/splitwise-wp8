@@ -20,6 +20,14 @@
         </Grid.RowDefinitions>
 
         <phone:WebBrowser x:Name="LoginBrowser" Margin="0,0,0,0" Navigating="LoginBrowser_Navigating" />
+
+        <Grid x:Name="SplashScreen">
+            <Rectangle Fill="#009199" HorizontalAlignment="Left" Height="768" Stroke="Black" VerticalAlignment="Top" Width="480"/>
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Image Height="159" Margin="0,0,0,5" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="159" Source="/Assets/ApplicationIcon.png"/>
+                <Image Source="/Assets/ApplicationName.png" Width="240" Margin="0,5,0,0" />
+            </StackPanel>
+        </Grid>
     </Grid>
 
 </phone:PhoneApplicationPage>

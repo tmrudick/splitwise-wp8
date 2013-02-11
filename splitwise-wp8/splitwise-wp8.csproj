@@ -156,6 +156,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\ApplicationName.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Delete.png" />

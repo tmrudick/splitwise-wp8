@@ -42,7 +42,6 @@ namespace Splitwise.Views
 
             // Check isolated storage for existing OAuth information
             OAuthCredentials credentials;
-
             storage.TryGetValue("credentials", out credentials);
 
             if (credentials != null)
@@ -68,8 +67,14 @@ namespace Splitwise.Views
 
         private async void LoginBrowser_Navigating(object sender, NavigatingEventArgs e)
         {
+            // Hide the splash screen
+            SplashScreen.Visibility = System.Windows.Visibility.Collapsed;
+
             if (e.Uri.AbsoluteUri.Contains("oauth.tomrudick.com"))
             {
+                // Hide the browser window so the user doesn't see a bunch of OAuth redirection page flashes.
+                LoginBrowser.Visibility = System.Windows.Visibility.Collapsed;
+
                 var qs = HttpHelpers.ParseQueryString(e.Uri.Query);
 
                 var verifier = qs["oauth_verifier"];
