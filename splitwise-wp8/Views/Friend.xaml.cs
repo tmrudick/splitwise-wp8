@@ -8,7 +8,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Splitwise.ViewModels;
-using Splitwise.Models;
+using models = Splitwise.Models;
 
 namespace Splitwise.Views
 {
@@ -26,11 +26,26 @@ namespace Splitwise.Views
         {
             long friendshipId = long.Parse(NavigationContext.QueryString["friendshipId"]);
 
-            Friendship friend = await proxy.GetFriend(friendshipId);
+            models.Friendship friend = await proxy.GetFriend(friendshipId);
 
             viewModel = new FriendViewModel(friend);
 
             this.DataContext = viewModel;
+        }
+
+        private void NavigateToExpense(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            TextBlock textBlock = sender as TextBlock;
+
+            if (textBlock != null)
+            {
+                models.Expense expense = textBlock.DataContext as models.Expense;
+
+                if (expense != null)
+                {
+                    NavigationService.Navigate(new Uri(string.Format("/Views/Expense.xaml?expenseId={0}", expense.Id), UriKind.Relative));
+                }
+            }
         }
     }
 }

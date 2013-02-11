@@ -8,7 +8,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Splitwise.ViewModels;
-using Splitwise.Models;
+using models = Splitwise.Models;
 using Splitwise.Utility;
 
 namespace Splitwise.Views
@@ -30,9 +30,9 @@ namespace Splitwise.Views
             string description = DescriptionTextBox.Text;
             double amount = double.Parse(AmountTextBox.Text);
 
-            IEnumerable<User> splitees = FriendSelector.SelectedItems.ToIEnumerable<User>();
+            IEnumerable<models.User> splitees = FriendSelector.SelectedItems.ToIEnumerable<models.User>();
 
-            Expense expense = await ViewModel.Save(description, amount, splitees);
+            models.Expense expense = await ViewModel.Save(description, amount, splitees);
 
             if (expense != null)
             {

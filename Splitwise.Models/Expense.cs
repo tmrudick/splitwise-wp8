@@ -23,6 +23,7 @@ namespace Splitwise.Models
 
     public class ExpenseWrapper
     {
+        public Expense Expense { get; set; }
         public List<Expense> Expenses { get; set; }
     }
 }

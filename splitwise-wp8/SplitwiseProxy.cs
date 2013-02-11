@@ -45,9 +45,17 @@ namespace Splitwise
             return this.currentUser;
         }
 
-        public async Task<IEnumerable<Expense>> GetExpenses()
+        public async Task<IEnumerable<Expense>> GetExpenses(bool showDeleted = false)
         {
-            return await GetExpenses(null);
+            return await GetExpenses(null, showDeleted);
+        }
+
+        public async Task<Expense> GetExpense(long expenseId)
+        {
+            var request = new RestRequest("get_expense/" + expenseId, Method.GET);
+            ExpenseWrapper wrapper = await this.client.ExecuteRequestAsync<ExpenseWrapper>(request);
+
+            return wrapper.Expense;
         }
 
         public async Task<IEnumerable<Expense>> GetExpenses(long? friendshipId, bool showDeleted = false)

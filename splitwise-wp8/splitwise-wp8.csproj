@@ -112,6 +112,9 @@
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\ItemViewModel.cs" />
     <Compile Include="ViewModels\NewExpenseViewModel.cs" />
+    <Compile Include="Views\Expense.xaml.cs">
+      <DependentUpon>Expense.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Friend.xaml.cs">
       <DependentUpon>Friend.xaml</DependentUpon>
     </Compile>
@@ -130,6 +133,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="Views\Expense.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Friend.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
