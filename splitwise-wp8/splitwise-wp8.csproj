@@ -120,6 +120,7 @@
     <Compile Include="Views\Friend.xaml.cs">
       <DependentUpon>Friend.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Helpers\BackStackHelpers.cs" />
     <Compile Include="Views\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
@@ -164,6 +165,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\ApplicationName.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Delete.png" />

@@ -12,7 +12,8 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
     shell:SystemTray.IsVisible="False"
-    xmlns:converters="clr-namespace:Splitwise.Converters">
+    xmlns:converters="clr-namespace:Splitwise.Converters"
+    Loaded="Page_Loaded">
 
     <phone:PhoneApplicationPage.Resources>
         <converters:DebtColorConverter x:Key="DebtColorConverter" />

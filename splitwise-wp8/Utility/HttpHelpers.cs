@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace Splitwise.Utility
 {
@@ -10,11 +11,9 @@ namespace Splitwise.Utility
     {
         public static Dictionary<string, string> ParseQueryString(string query)
         {
-            // Removal optional ordinal ?
-            if (query.StartsWith("?"))
-            {
-                query = query.Substring(1);
-            }
+            // Do a non-greedy regex replace of everything up-to and including
+            // the '?' with the empty string.
+            query = Regex.Replace(query, @"^.*?\?", "");
 
             Dictionary<string, string> parsed = new Dictionary<string, string>();
             string[] parts = query.Split('&');

@@ -38,5 +38,13 @@ namespace Splitwise.Views
         {
             NavigationService.Navigate(new Uri("/Views/NewExpense.xaml", UriKind.Relative));
         }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (Helpers.BackStackHelpers.ShouldHideFromBackStack(NavigationContext.QueryString))
+            {
+                NavigationService.RemoveBackEntry();
+            }
+        }
     }
 }

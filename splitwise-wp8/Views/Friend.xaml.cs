@@ -47,5 +47,13 @@ namespace Splitwise.Views
                 }
             }
         }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (Helpers.BackStackHelpers.ShouldHideFromBackStack(NavigationContext.QueryString))
+            {
+                NavigationService.RemoveBackEntry();
+            }
+        }
     }
 }
